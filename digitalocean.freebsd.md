@@ -138,3 +138,23 @@ Reboot:
 sudo reboot
 ```
 
+##### 9. sources
+Install `svnup` utility:
+```
+cd /usr/ports/net/svnup/
+sudo make install clean
+```
+Edit `/usr/local/etc/svnup.conf` (e.g., `sudo vi /usr/local/etc/svnup.conf`)  
+
+set appropriate `host`...
+```
+host=svn0.eu.freebsd.org
+```
+...and appropriate `branch` under `release` category:
+```
+branch=base/releng/10.2
+```
+Update sources:
+```
+sudo svnup release
+```
