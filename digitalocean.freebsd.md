@@ -127,4 +127,14 @@ pkg version -vIL=
 sudo portmaster -a
 ```
 
+##### 8. update system
+Fetch and install updates:
+```
+sudo freebsd-update fetch
+sudo freebsd-update install
+```
+Reboot:
+```
+sudo reboot
+```
 
