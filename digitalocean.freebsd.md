@@ -108,5 +108,23 @@ Remove other unused packages:
 pkg autoremove
 ```
 
+##### 7. update packages
+Update ports tree:
+```
+sudo portsnap fetch update
+```
+Upgrade `pkg` utility and install `portmaster`:
+```
+cd /usr/ports/ports-mgmt/pkg
+sudo make deinstall reinstall clean
+cd /usr/ports/ports-mgmt/portmaster
+sudo make install clean
+rehash
+```
+Check and upgrade packages:
+```
+pkg version -vIL=
+sudo portmaster -a
+```
 
 
