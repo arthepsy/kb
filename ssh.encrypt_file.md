@@ -15,7 +15,7 @@ openssl rsa -in ~/.ssh/id_rsa -pubout > ~/.ssh/id_rsa.pub.pem
 ##### 2. generate key
 Check the maxium size for symmetric key (_in bytes_):
 ```
-ssh-keygen -l -f .ssh/id_rsa | awk '{ printf("%d", ($1 - 96) / 8) }'
+ssh-keygen -l -f ~/.ssh/id_rsa | awk '{ printf("%d", ($1 - 96) / 8) }'
 ```
 Generate random key (_assuming 2048-bit RSA key_):
 ```
