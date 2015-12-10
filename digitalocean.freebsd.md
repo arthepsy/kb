@@ -128,6 +128,11 @@ sudo portmaster -a
 ```
 
 ##### 8. update system
+Disable `/usr/src` updating by editing `/etc/freebsd-update.conf`:
+```
+-Components src world kernel
++Components world kernel
+```
 Fetch and install updates:
 ```
 sudo freebsd-update fetch
