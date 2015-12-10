@@ -1,4 +1,7 @@
 # DigitalOcean - FreeBSD
+- [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
+- [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
+
 ## initial setup
 ##### 1. accounts
 Add new user and copy ssh keys:
