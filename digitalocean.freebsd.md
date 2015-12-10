@@ -163,3 +163,56 @@ Update sources:
 ```
 sudo svnup release
 ```
+
+## custom kernel
+Custom kernel and `freebsd-update` utility doesn't mix too well, therefore one must keep custom kernel in different location. If default kernel is updated by this utility, one should rebuild the custom kernel.
+
+##### sources
+Update sources:
+```
+sudo svnup release
+```
+
+##### initial configuration
+Copy kernel configuration, based on GENERIC:
+```
+cd /usr/src/sys/`uname -m`/conf
+sudo cp GENERIC /root/MYKERNEL
+sudo ln -s /root/MYKERNEL .
+```
+Edit kernel configuration:
+```
+sudo vi MYKERNEL
+```
+Edit `/etc/make.conf` (e.g., `sudo vi /etc/make.conf`) and specify kernel file and location for build tools:  
+(`KERNCONF` - kernel configuration file name, `INSTKERNNAME` - kernel install directory under `/boot`)
+```
+KERNCONF=MYKERNEL
+INSTKERNNAME=my-kernel
+```
+Edit `/boot/loader.conf.local` (e.g., `sudo vi /boot/loader.conf.local`) and specify to boot custom kernel:
+```
+kernel="my-kernel"
+```
+
+##### building and installing
+Go to source directory:
+```
+cd /usr/src
+```
+Build tools required for building kernel:
+```
+sudo make -j `sysctl -n hw.ncpu` kernel-toolchain
+```
+Build kernel:
+```
+sudo make -j `sysctl -n hw.ncpu` buildkernel
+```
+Install kernel:
+```
+sudo make -j `sysctl -n hw.ncpu` installkernel
+```
+Reboot:
+```
+sudo reboot
+```
