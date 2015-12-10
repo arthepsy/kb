@@ -213,7 +213,7 @@ sudo make -j `sysctl -n hw.ncpu` buildkernel
 ```
 Install kernel:
 ```
-sudo make -j `sysctl -n hw.ncpu` installkernel
+sudo make installkernel
 ```
 Reboot:
 ```
