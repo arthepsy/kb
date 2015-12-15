@@ -1,7 +1,7 @@
 # DigitalOcean - FreeBSD
 - [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
-- [Floating IP](#floating-ip) - additional routing for outgoing traffic through floating ip 
+- [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
 ##### 1. accounts
@@ -225,7 +225,7 @@ sudo reboot
 DigitalOcean provides Floating IP for high availability. It is primarily intended for incoming traffic, but it can also be used for outgoing traffic.  
 
 ##### enable
-Log into DigitialOcean and enable Floating IP in Networking menu. Afterwars, gather configuration:
+Log into DigitialOcean and enable Floating IP in Networking menu. Afterwards, gather configuration:
 ```
 curl -w '\n' -s http://169.254.169.254/metadata/v1/interfaces/public/0/anchor_ipv4/address
 curl -w '\n' -s http://169.254.169.254/metadata/v1/interfaces/public/0/anchor_ipv4/gateway
