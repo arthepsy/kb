@@ -22,17 +22,17 @@ Disconnect and reconnect with new user.
 
 Remove `freebsd` user:
 ```
-pw groupmod wheel -d freebsd
-rmuser freebsd
+sudo pw groupmod wheel -d freebsd
+sudo rmuser freebsd
 ```
 Change `root` password...
 ```
 head -c 1024 /dev/urandom | sha256
-passwd root
+sudo passwd root
 ```
 ...or lock `root` account:
 ```
-pw lock root
+sudo pw lock root
 ```
 ##### 2. sshd
 Edit `/etc/ssh/sshd_config` configuration (e.g., `sudo vi /etc/ssh/sshd_config`):  
@@ -56,7 +56,7 @@ Match User root
 ```
 Restart sshd:
 ```
-service sshd restart
+sudo service sshd restart
 ```
 
 ##### 3. time
@@ -103,13 +103,13 @@ Edit `/etc/rc.subr` (e.g., `sudo vi /etc/rc.subr`) and remove these lines:
 ##### 6. unused packages
 Stop and remove `avahi`, used for DigitalOcean's initial configuration:
 ```
-pkill avahi-autoipd
-pkg delete avahi-app
-rmuser avahi
+sudo pkill avahi-autoipd
+sudo pkg delete avahi-app
+sudo rmuser avahi
 ```
 Remove other unused packages:
 ```
-pkg autoremove
+sudo pkg autoremove
 ```
 
 ##### 7. update packages
