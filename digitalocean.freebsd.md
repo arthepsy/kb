@@ -1,6 +1,7 @@
 # DigitalOcean - FreeBSD
 - [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
+- [Floating IP](#floating-ip) - additional routing for outgoing traffic through floating ip 
 
 ## initial setup
 ##### 1. accounts
@@ -218,4 +219,42 @@ sudo make installkernel
 Reboot:
 ```
 sudo reboot
+```
+
+## floating ip
+DigitalOcean provides Floating IP for high availability. It is primarily intended for incoming traffic, but it can also be used for outgoing traffic.  
+
+##### enable
+Log into DigitialOcean and enable Floating IP in Networking menu. Afterwars, gather configuration:
+```
+curl -w '\n' -s http://169.254.169.254/metadata/v1/interfaces/public/0/anchor_ipv4/address
+curl -w '\n' -s http://169.254.169.254/metadata/v1/interfaces/public/0/anchor_ipv4/gateway
+```
+It will output assigned Floating IP and gateway, e.g.:
+```
+10.50.0.9
+10.50.0.1
+```
+
+##### configure
+Edit `/boot/loader.conf.local` to enable additional routing table:
+```
+net.fibs=2
+net.add_addr_allfibs=0
+```
+
+Edit `/etc/rc.conf` to add Floating IP and set up additional routing table configuration:
+```
+ifconfig_vtnet0_alias0="inet 10.50.0.9 netmask 255.255.0.0"
+static_routes="float_if float_gw"
+route_float_if="-net 10.50.0.0/24 -iface vtnet0 -fib 1"
+route_float_gw="default 10.50.0.1 -fib 1"
+```
+
+Reboot.
+
+##### usage
+To use new Floating ip routing table, prefix each command with `setfib 1`, e.g.:
+```
+setfib 1 ping www.github.com
 ```
