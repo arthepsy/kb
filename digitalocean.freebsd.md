@@ -14,7 +14,7 @@ sudo cp /home/freebsd/.ssh/authorized_keys /home/${_user}/.ssh/
 sudo chown -R ${_user}:${_user} /home/${_user}/.ssh
 unset _user
 ```
-Add sudo access, i.e., run `visudo` and add line:
+Add sudo access, i.e., run `sudo visudo` and add line:
 ```
 newuser ALL=(ALL) ALL
 ```
