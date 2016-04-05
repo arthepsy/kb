@@ -1,9 +1,9 @@
 # DigitalOcean - FreeBSD
 - [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
-  - [accounts](#user-content-1-accounts), [sshd](#user-content-2-sshd), [time](#user-content-3-time), [swap](#user-content-4-swap), [droplet.conf](#user-content-5-dropletconf), [packages](#user-content-6-packages), [update system](#user-content-7-update-system), [sources](#user-content-8-accounts)
+  - [accounts](#1-accounts), [sshd](#2-sshd), [time](#3-time), [swap](#4-swap), [droplet.conf](#5-dropletconf), [packages](#6-packages), [update system](#update-system), [sources](#8-accounts)
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
-  - [system update](#user-content-system-update), [system upgrade](#user-content-system-upgrade)  
+  - [system update](#system-update), [system upgrade](#system-upgrade)  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
