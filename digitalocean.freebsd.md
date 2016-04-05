@@ -356,7 +356,7 @@ _(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
   sudo env UNAME_r=10.2-RELEASE freebsd-update upgrade -r 10.3-RELEASE
   ```
 
-  _Note: `UNAME_r` environment variable is provided to fake `uname -r` reply for `freebsd-update`._ 
+  _Note: `UNAME_r` environment variable is provided to fake `uname -r` output for `freebsd-update`._ 
 
 
 ## floating ip
