@@ -1,7 +1,7 @@
 # DigitalOcean - FreeBSD
 - [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
-- [Maintenance](#maintenance) - updating system with `freebsd-update` and custom kernel  
+- [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
@@ -223,7 +223,7 @@ sudo reboot
 ```
 
 ## maintenance
-##### update system
+#### system update
 
 * Ensure that `src` will not be updated, i.e., remove `src` from `Components` in `/etc/freebsd-update.conf`:
   ```
@@ -288,6 +288,69 @@ sudo reboot
   ```
   reboot
   ```
+
+#### system upgrade
+
+_(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
+
+* Verify configuration:  
+
+  This section relies that custom kernel is configured in `/etc/make.conf` as...  
+  ```
+  KERNCONF=DO-MIN
+  INSTKERNNAME=do-kernel
+  ```
+
+  ...and respective `/boot/loader.conf.local` as...
+
+  ```
+  kernel="do-kernel"
+  kernels="do-kernel kernel"
+  ```
+
+* Configure `svnup` for new release in `/usr/local/etc/svnup.conf`:  
+
+  ```
+  [release]
+  branch=base/releng/10.3
+  target=/usr/src
+  ```
+
+* _(optional_) Note kernel changes:  
+  
+  Keep a copy of old GENERIC kernel before source update:  
+  ```
+  cp /usr/src/sys/`uname -m`/conf/GENERIC /root/GENERIC.prev
+  ```
+  
+  After source update, check differences:  
+  ```
+  diff -ruN /root/GENERIC.prev /usr/src/sys/`uname -m`/conf/GENERIC
+  ```
+
+* Update sources:  
+  ```
+  svnup release
+  ```
+
+* Compile and install kernel:  
+  ```
+  cd /usr/src
+  sudo make -j `sysctl -n hw.ncpu` kernel-toolchain
+  sudo make -j `sysctl -n hw.ncpu` buildkernel
+  sudo make installkernel
+  ```
+
+* Reboot:  
+  ```
+  reboot
+  ```
+
+* Upgrade system:  
+  ```
+  freebsd-update upgrade -r 10.3-RELEASE
+  ```
+
 
 ## floating ip
 DigitalOcean provides Floating IP for high availability. It is primarily intended for incoming traffic, but it can also be used for outgoing traffic.  
