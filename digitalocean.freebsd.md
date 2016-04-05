@@ -5,7 +5,7 @@
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
   - [system update](#system-update), [system upgrade](#system-upgrade)  
 - [Hardening](#hardening) - hardening the system    
-  - [ntpd](#ntpd), [ssl](#ssl), [syslogd](#syslogd), [sendmail](#sendmail)  
+  - [ntpd](#ntpd), [ssl](#ssl), [syslogd](#syslogd), [sendmail](#sendmail), [sshd](#sshd)  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
@@ -430,6 +430,47 @@ Operate `syslogd` in secure mode and bind socket to loopback:
   sudo sysrc sendmail_msp_queue_enable="NO"
   ```
 
+#### sshd
+Replace system `OpenSSH` with ports `OpenSSH`.  
+
+* Stop and disable system `sshd`:  
+  ```
+  sudo service sshd stop
+  sudo sysrc sshd_enable=NO
+  ```
+
+* Install `OpenSSH` from ports:  
+  ```
+  cd /usr/ports/security/openssh-portable
+  sudo make install clean
+  ```
+  
+* Edit `/usr/local/etc/ssh/sshd_config` and configure `OpenSSH`:  
+  ```
+  Port 22
+  Protocol 2
+  VersionAddendum none
+  
+  HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa
+  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+  Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com
+  
+  PermitRootLogin no
+  PasswordAuthentication no
+  ChallengeResponseAuthentication no
+  X11Forwarding no
+  
+  Subsystem       sftp    /usr/local/libexec/sftp-server
+  ```
+
+  _Note: This example configuration is adjusted for strict and secure setup. Test before making permanent._
+
+* Enable and start `OpenSSH`:  
+  ```
+  sudo sysrc openssh_enable=YES
+  sudo service openssh start
+  ```
 
 ## floating ip
 DigitalOcean provides Floating IP for high availability. It is primarily intended for incoming traffic, but it can also be used for outgoing traffic.  
