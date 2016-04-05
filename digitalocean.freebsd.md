@@ -5,7 +5,7 @@
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
   - [system update](#system-update), [system upgrade](#system-upgrade)  
 - [Hardening](#hardening) - hardening the system    
-  - [ntpd](#ntpd), [ssl](#ssl), [syslogd](#syslogd)  
+  - [ntpd](#ntpd), [ssl](#ssl), [syslogd](#syslogd), [sendmail](#sendmail)  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
@@ -418,6 +418,15 @@ Operate `syslogd` in secure mode and bind socket to loopback:
   sudo sysrc syslogd_flags="-s -b 127.0.0.1"
   sudo service restart syslogd
   ```
+
+#### sendmail
+Disable `sendmail`:
+```
+sudo sysrc sendmail_enable="NO"
+sudo sysrc sendmail_submit_enable="NO"
+sudo sysrc sendmail_outbound_enable="NO"
+sudo sysrc sendmail_msp_queue_enable="NO"
+```
 
 
 ## floating ip
