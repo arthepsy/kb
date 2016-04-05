@@ -5,7 +5,7 @@
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
   - [system update](#system-update), [system upgrade](#system-upgrade)  
 - [Hardening](#hardening) - hardening the system    
-  - [ntpd](#ntpd)  
+  - [ntpd](#ntpd), [ssl](#ssl)  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
@@ -397,6 +397,17 @@ Replace system `ntpd` with `OpenNTPD`.
   sudo sysrc openntpd_enable=YES
   sudo service openntpd start
   ```
+
+#### ssl
+Use `LibreSSL` instead of `OpenSSL`.
+
+* Edit `/etc/make.conf` and configure ports to use `LibreSSL`:
+  ```
+  WITH_OPENSSL_PORT=yes
+  OPENSSL_PORT=security/libressl-devel
+  ```
+  
+  _Note: Ports depending on OpenSSL will have to be recompiled._
 
 ## floating ip
 DigitalOcean provides Floating IP for high availability. It is primarily intended for incoming traffic, but it can also be used for outgoing traffic.  
