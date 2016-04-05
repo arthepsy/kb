@@ -1,9 +1,9 @@
 # DigitalOcean - FreeBSD
 - [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
+  - [accounts](#user-content-1-accounts), [sshd](#user-content-2-sshd), [accounts](#user-content-3-time), [swap](#user-content-4-swap), [droplet.conf](#user-content-5-dropletconf), [packages](#user-content-6-packages), [update system](#user-content-7-update-system), [sources](#user-content-8-accounts)
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
-  - [system update](#user-content-system-update)  
-  - [system upgrade](#user-content-system-upgrade)  
+  - [system update](#user-content-system-update), [system upgrade](#user-content-system-upgrade)  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
@@ -103,7 +103,8 @@ Edit `/etc/rc.subr` (e.g., `sudo vi /etc/rc.subr`) and remove these lines:
         fi
 ```
 
-##### 6. unused packages
+##### 6. packages
+###### unused packages
 Stop and remove `avahi`, used for DigitalOcean's initial configuration:
 ```
 sudo pkill avahi-autoipd
@@ -115,7 +116,7 @@ Remove other unused packages:
 sudo pkg autoremove
 ```
 
-##### 7. update packages
+###### update packages
 Update ports tree:
 ```
 sudo portsnap fetch update
@@ -134,7 +135,7 @@ pkg version -vIL=
 sudo portmaster -a
 ```
 
-##### 8. update system
+##### 7. update system
 Disable `/usr/src` updating by editing `/etc/freebsd-update.conf`:
 ```
 -Components src world kernel
@@ -150,7 +151,7 @@ Reboot:
 sudo reboot
 ```
 
-##### 9. sources
+##### 8. sources
 Install `svnup` utility:
 ```
 cd /usr/ports/net/svnup
