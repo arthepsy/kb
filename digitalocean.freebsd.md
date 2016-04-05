@@ -4,6 +4,8 @@
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
   - [system update](#system-update), [system upgrade](#system-upgrade)  
+- [Hardening](#hardening) - hardening the system    
+  - [ntpd](#ntpd)  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
@@ -365,6 +367,35 @@ _(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
 * (_optional_) Check system integrity:  
   ```
   sudo freebsd-update IDS
+  ```
+
+## hardening
+#### ntpd
+Replace system `ntpd` with `OpenNTPD`.  
+
+* Stop and disable system `ntpd`:
+  ```
+  sudo service stop ntpd
+  sudo sysrc -X ntpd_enable
+  sudo sysrc -X ntpd_sync_on_start
+  ```
+  
+* Install `OpenNTPD`:
+  ```
+  cd /usr/ports/net/openntpd
+  sudo make install clean
+  ```
+  
+* Edit `/usr/local/etc/ntpd.conf` and configure `OpenNTPD` (_enabled settings shown_):
+  ```
+  servers nl.pool.ntp.org
+  constraints from "https://www.google.com/"
+  ```
+
+* Enable and start `OpenNTPD`:
+  ```
+  sudo sysrc openntpd_enable=YES
+  sudo service openntpd start
   ```
 
 ## floating ip
