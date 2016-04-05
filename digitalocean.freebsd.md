@@ -1,6 +1,6 @@
 # DigitalOcean - FreeBSD
 - [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
-  - [accounts](#1-accounts), [sshd](#2-sshd), [time](#3-time), [swap](#4-swap), [droplet.conf](#5-dropletconf), [packages](#6-packages), [update system](#update-system), [sources](#8-accounts)
+  - [accounts](#1-accounts), [sshd](#2-sshd), [time](#3-time), [swap](#4-swap), [droplet.conf](#5-dropletconf), [packages](#6-packages), [update system](#7-update-system), [sources](#8-sources)
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
   - [system update](#system-update), [system upgrade](#system-upgrade)  
