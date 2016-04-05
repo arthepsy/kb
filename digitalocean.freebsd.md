@@ -351,13 +351,20 @@ _(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
   sudo reboot
   ```
 
-* Upgrade system:  
+* Download the upgrade, install kernel and reboot:  
   ```
   sudo env UNAME_r=10.2-RELEASE freebsd-update upgrade -r 10.3-RELEASE
+  sudo freebsd-update install
+  sudo reboot
   ```
 
   _Note: `UNAME_r` environment variable is provided to fake `uname -r` output for `freebsd-update`._ 
 
+* Install system upgrade and reboot:
+  ```
+  sudo freebsd-update install
+  sudo reboot
+  ```
 
 ## floating ip
 DigitalOcean provides Floating IP for high availability. It is primarily intended for incoming traffic, but it can also be used for outgoing traffic.  
