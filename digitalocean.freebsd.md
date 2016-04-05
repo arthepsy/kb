@@ -5,7 +5,7 @@
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
   - [system update](#system-update), [system upgrade](#system-upgrade)  
 - [Hardening](#hardening) - hardening the system    
-  - [ntpd](#ntpd), [ssl](#ssl)  
+  - [ntpd](#ntpd), [ssl](#ssl), [syslogd](#syslogd)  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
@@ -408,6 +408,17 @@ Use `LibreSSL` instead of `OpenSSL`.
   ```
   
   _Note: Ports depending on OpenSSL will have to be recompiled._
+
+#### syslogd
+Operate `syslogd` in secure mode and bind socket to loopback:
+
+* Change settings and restart `syslogd`:  
+
+  ```
+  sudo sysrc syslogd_flags="-s -b 127.0.0.1"
+  sudo service restart syslogd
+  ```
+
 
 ## floating ip
 DigitalOcean provides Floating IP for high availability. It is primarily intended for incoming traffic, but it can also be used for outgoing traffic.  
