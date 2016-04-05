@@ -336,6 +336,7 @@ _(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
 * Compile and install kernel:  
   ```
   cd /usr/src
+  sudo rm -rf /usr/obj/*
   sudo make -j `sysctl -n hw.ncpu` kernel-toolchain
   sudo make -j `sysctl -n hw.ncpu` buildkernel
   sudo make installkernel
