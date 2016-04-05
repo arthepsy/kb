@@ -376,7 +376,7 @@ Replace system `ntpd` with `OpenNTPD`.
 * Stop and disable system `ntpd`:
   ```
   sudo service stop ntpd
-  sudo sysrc -X ntpd_enable
+  sudo sysrc ntpd_enable=NO
   sudo sysrc -X ntpd_sync_on_start
   ```
   
