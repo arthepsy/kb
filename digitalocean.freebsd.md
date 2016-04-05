@@ -337,17 +337,13 @@ _(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
   sudo find /usr/src -type d -empty -delete
   ```
 
-* Compile and install kernel:  
+* Compile and install kernel, then reboot:  
   ```
   cd /usr/src
   sudo rm -rf /usr/obj/*
   sudo make -j `sysctl -n hw.ncpu` kernel-toolchain
   sudo make -j `sysctl -n hw.ncpu` buildkernel
   sudo make installkernel
-  ```
-
-* Reboot:  
-  ```
   sudo reboot
   ```
 
@@ -364,6 +360,11 @@ _(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
   ```
   sudo freebsd-update install
   sudo reboot
+  ```
+
+* (_optional_) Check system integrity:  
+  ```
+  sudo freebsd-update IDS
   ```
 
 ## floating ip
