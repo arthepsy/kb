@@ -281,12 +281,12 @@ sudo reboot
 
 * Install updates
   ```
-  freebsd-update install
+  sudo freebsd-update install
   ```
 
 * Reboot
   ```
-  reboot
+  sudo reboot
   ```
 
 #### system upgrade
@@ -320,17 +320,18 @@ _(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
   
   Keep a copy of old GENERIC kernel before source update:  
   ```
-  cp /usr/src/sys/`uname -m`/conf/GENERIC /root/GENERIC.prev
+  sudo cp /usr/src/sys/`uname -m`/conf/GENERIC /root/GENERIC.prev
   ```
   
   After source update, check differences:  
   ```
-  diff -ruN /root/GENERIC.prev /usr/src/sys/`uname -m`/conf/GENERIC
+  sudo diff -ruN /root/GENERIC.prev /usr/src/sys/`uname -m`/conf/GENERIC
   ```
 
-* Update sources:  
+* Update sources and remove empty directories:  
   ```
-  svnup release
+  sudo svnup release
+  sudo find /usr/src -type d -empty -delete
   ```
 
 * Compile and install kernel:  
@@ -344,12 +345,12 @@ _(Example upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel)_.
 
 * Reboot:  
   ```
-  reboot
+  sudo reboot
   ```
 
 * Upgrade system:  
   ```
-  freebsd-update upgrade -r 10.3-RELEASE
+  sudo freebsd-update upgrade -r 10.3-RELEASE
   ```
 
 
