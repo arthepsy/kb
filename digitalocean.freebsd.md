@@ -420,13 +420,15 @@ Operate `syslogd` in secure mode and bind socket to loopback:
   ```
 
 #### sendmail
-Disable `sendmail`:
-```
-sudo sysrc sendmail_enable="NO"
-sudo sysrc sendmail_submit_enable="NO"
-sudo sysrc sendmail_outbound_enable="NO"
-sudo sysrc sendmail_msp_queue_enable="NO"
-```
+* Stop and disable `sendmail`:  
+
+  ```
+  sudo service sendmail stop
+  sudo sysrc sendmail_enable="NO"
+  sudo sysrc sendmail_submit_enable="NO"
+  sudo sysrc sendmail_outbound_enable="NO"
+  sudo sysrc sendmail_msp_queue_enable="NO"
+  ```
 
 
 ## floating ip
