@@ -1,6 +1,7 @@
 # DigitalOcean - FreeBSD
 - [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
+- [Maintenance](#maintenance) - updating system with `freebsd-update` and custom kernel  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
@@ -220,6 +221,73 @@ Reboot:
 ```
 sudo reboot
 ```
+
+## maintenance
+##### update system
+
+* Ensure that `src` will not be updated, i.e., remove `src` from `Components` in `/etc/freebsd-update.conf`:
+  ```
+  Components world kernel
+  ```
+
+* Fetch system updates:
+  ```
+  sudo freebsd-update fetch
+  ```
+
+  If output contains notice about updating kernel, e.g. ...
+  ```
+  The following files will be updated as part of updating to ...
+  (..)
+  /boot/kernel/kernel
+  ```
+  ...and custom kernel is being used, then it needs to be updated aswell.
+  
+* (_if required_) Update custom kernel:  
+  
+  * Verify configuration:  
+  
+    This section relies that custom kernel is configured in `/etc/make.conf` as...  
+    ```
+    KERNCONF=DO-MIN
+    INSTKERNNAME=do-kernel
+    ```
+    
+    ...and respective `/boot/loader.conf.local` as...
+    
+    ```
+    kernel="do-kernel"
+    kernels="do-kernel kernel"
+    ```
+    ... and respective `/usr/local/etc/svnup.conf` as (for 10.2-RELEASE):
+    ```
+    [release]
+    branch=base/releng/10.2
+    target=/usr/src
+    ```
+  
+  * Update sources:  
+    ```
+    sudo svnup release
+    ```
+  
+  * Compile and install kernel:  
+    ```
+    cd /usr/src
+    sudo make -j `sysctl -n hw.ncpu` kernel-toolchain
+    sudo make -j `sysctl -n hw.ncpu` buildkernel
+    sudo make installkernel
+    ```
+
+* Install updates
+  ```
+  freebsd-update install
+  ```
+
+* Reboot
+  ```
+  reboot
+  ```
 
 ## floating ip
 DigitalOcean provides Floating IP for high availability. It is primarily intended for incoming traffic, but it can also be used for outgoing traffic.  
