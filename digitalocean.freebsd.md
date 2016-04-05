@@ -2,6 +2,8 @@
 - [Initial setup](#initial-setup) - various steps after booting a fresh FreeBSD instance
 - [Custom kernel](#custom-kernel) - peaceful living with `freebsd-update` and custom kernel  
 - [Maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
+  - [system update](#user-content-system-update)  
+  - [system upgrade](#user-content-system-upgrade)  
 - [Floating IP](#floating-ip) - additional routing table for outgoing traffic 
 
 ## initial setup
