@@ -4,8 +4,14 @@
   ```
   cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 5
   ```
-  
+
 * alpha-numeric and special characters  
   ```
   cat /dev/urandom | tr -dc 'a-zA-Z0-9!\@#\$%^&*-+_=' | fold -w 16 | head -n 5
   ```
+
+* hexadecimal  
+  ```
+  cat /dev/urandom | tr -dc '0-9a-f' | fold -w 16 | head -n 5
+  ```
+
