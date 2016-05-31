@@ -404,7 +404,7 @@ Use `LibreSSL` instead of `OpenSSL`.
 * Edit `/etc/make.conf` and configure ports to use `LibreSSL`:
   ```
   WITH_OPENSSL_PORT=yes
-  OPENSSL_PORT=security/libressl-devel
+  OPENSSL_PORT=security/libressl
   ```
   
   _Note: Ports depending on OpenSSL will have to be recompiled._
