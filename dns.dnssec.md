@@ -50,10 +50,10 @@ DNS record example: `example.com. IN DNSKEY 256 3 8 AwEAAalqhw...`
 
 * **flags** (_0-65535_):  
 
-  | value  | flag                                                 |
-  | -------|------------------------------------------------------| 
-  | 256    | key used to sign zone                                |
-  | 257    | key used to sign other keys (e.g., zone signing key) |
+  | value  | name | flag                                                 |
+  | -------|------|------------------------------------------------------| 
+  | 256    | ZSK  | key used to sign zone                                |
+  | 257    | KSK  | key used to sign other keys (e.g., zone signing key) |
 
 * **protocol** (_0-255_):  
 
