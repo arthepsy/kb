@@ -2,6 +2,7 @@
 - [NSEC3PARAM](#nsec3param)  
 - [DNSKEY](#dnskey)  
 - [DS](#ds)  
+- [DNSKEY -> DS](#dnskey---ds)
 
 ### NSEC3PARAM
 Reference: [RFC5155](https://tools.ietf.org/html/rfc5155)  
