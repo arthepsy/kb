@@ -16,3 +16,8 @@
   ```
   systemctl list-units-files
   ```
+
+* Change state:
+  ```
+  systemctl status|enable|disable|start|stop|restart|stop unit
+  ```
