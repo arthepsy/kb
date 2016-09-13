@@ -1,10 +1,10 @@
 # Let’s Encrypt
 
 This is written based on FreeBSD and nginx, 
-using secure Let’s Encrypt client [letskencrypt](https://kristaps.bsd.lv/letskencrypt/).  
+using secure Let’s Encrypt client [acme-client](https://kristaps.bsd.lv/acme-client/).  
 
 ## install
-Download and install `letskencrypt`:  
+Download and install `acme-client`:  
 ```
 curl -O https://kristaps.bsd.lv/acme-client/snapshots/acme-client-portable.tgz
 tar -xvzf acme-client-portable.tgz
