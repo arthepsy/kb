@@ -6,9 +6,9 @@ using secure Let’s Encrypt client [letskencrypt](https://kristaps.bsd.lv/letsk
 ## install
 Download and install `letskencrypt`:  
 ```
-curl -O https://kristaps.bsd.lv/letskencrypt/snapshots/letskencrypt-portable.tgz
-tar -xvzf letskencrypt-portable.tgz
-cd letskencrypt-portable-0.1.6
+curl -O https://kristaps.bsd.lv/acme-client/snapshots/acme-client-portable.tgz
+tar -xvzf acme-client-portable.tgz
+cd acme-client-portable-0.1.11
 gmake install clean
 ```
 
@@ -29,7 +29,7 @@ In `server` block add following:
 ```
 
 ## wrapper
-For more convenient usage, create wrapper script:  
+For more convenient usage, create wrapper script `acme-client.sh`:  
 ```
 #!/bin/sh
 _ssldir="/etc/ssl/letsencrypt"
@@ -70,7 +70,7 @@ if [ ! -f "${_ssldir}/private/${_domain}/privkey.pem" ]; then
         fi
 fi
 
-letskencrypt \
+acme-client \
 -C "${_chldir}" \
 -f "${_ssldir}/privkey.pem" \
 -c "${_ssldir}/public/${_domain}" \
@@ -86,15 +86,15 @@ chmod 600 "${_ssldir}/private/${_domain}/privkey.pem"
 
 ## usage
 ```
-usage: letsencrypt.sh domain [args]  
+usage: acme-client.sh domain [args]  
 ```
 To request certificate:  
 ```
-letsencrypt.sh example.com -v
+acme-client.sh example.com -v
 ```
 To revoke certificate:  
 ```
-letsencrypt.sh example.com -rv
+acme-client.sh example.com -rv
 ```
 
 ## post-config
