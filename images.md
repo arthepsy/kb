@@ -11,7 +11,7 @@ pngquant --speed 1 file.png
 ```
 
 ```
-pngng -s 1 file.png
+pngnq -s 1 file.png
 ```
 
 ```
@@ -19,7 +19,7 @@ pngcrush src.png dest.png
 ```
 
 ```
-optipng -o7 file.png
+optipng -o7 src.png -out dest.png
 ```
 
 
