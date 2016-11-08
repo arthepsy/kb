@@ -1,8 +1,69 @@
 # FreeBSD
+- [custom kernel](#custom-kernel) - peaceful living with binary updates and custom kernel  
 - [hardening](#hardening) - hardening the system  
   - [sysctl](#sysctl), [tmp](#tmp), [ntpd](#ntpd), [ssl](#ssl), [syslogd](#syslogd), [sendmail](#sendmail), [sshd](#sshd)  
 - [maintenance](#maintenance) - system and package maintenance  
   - [system update](#system-update), [system upgrade](#system-upgrade), [packages update](#packages-update)  
+
+## custom kernel
+Custom kernel and binary updates with `freebsd-update` doesn't mix too well, therefore one must keep custom kernel in different location. If default kernel `/boot/kernel/kernel` is being updated by `freebsd-update`, then one should rebuild the custom kernel.
+
+#### sources
+* Install `net/svnup` package and configure `/usr/local/etc/svnup.conf` as (for 11.0-RELEASE):
+
+  ```
+  [release]
+  branch=base/releng/11.0
+  target=/usr/src
+  ```
+
+* Update sources:
+
+  ```
+  sudo svnup release
+  ```
+
+#### configuration
+* Create custom kernel configuration (based on GENERIC):
+
+  ```
+  cd /usr/src/sys/`uname -m`/conf
+  sudo cp GENERIC /root/MYKERNEL
+  sudo ln -s /root/MYKERNEL .
+  sudoedit MYKERNEL
+  ```
+
+* Edit `/etc/make.conf` and specify kernel file and location for build tools:  
+(`KERNCONF` - kernel configuration file name, `INSTKERNNAME` - kernel install directory under `/boot`)
+
+  ```
+  KERNCONF=MYKERNEL
+  INSTKERNNAME=my-kernel
+  ```
+  
+* Edit `/boot/loader.conf.local` and configure loader to boot custom kernel:
+  ```
+  kernel="my-kernel"
+  kernels="my-kernel kernel"
+  ```
+
+#### building and installing
+
+* Build tools required for building kernel and build the kernel:
+
+  ```
+  cd /usr/src
+  sudo make -j `sysctl -n hw.ncpu` kernel-toolchain
+  sudo make -j `sysctl -n hw.ncpu` buildkernel
+  ```
+
+* Install kernel and reboot:
+
+  ```
+  sudo make installkernel
+  sudo reboot
+  ```
+
 
 ## hardening
 _NOTE: This section describes system hardening for FreeBSD 11.x._  
