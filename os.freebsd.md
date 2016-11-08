@@ -1,9 +1,10 @@
 # FreeBSD
-- [maintenance](#maintenance) - update/upgrade system with `freebsd-update` and custom kernel  
+- [maintenance](#maintenance) - system and package maintenance  
   - [system update](#system-update), [packages update](#packages-update)  
 
 ## maintenance
 #### system update
+_NOTE: This section describes binary system updates via `freebsd-update` and custom kernel compilation from sources._
 
 * Ensure that `src` should not be updated, i.e., remove `src` from `Components` in default `/etc/freebsd-update.conf`:
   ```
@@ -39,7 +40,7 @@
     kernel="my-kernel"
     kernels="my-kernel kernel"
     ```
-    ... and respective `/usr/local/etc/svnup.conf` as (for 11.0-RELEASE):
+    ... and package `net/svnup` is installed with respective `/usr/local/etc/svnup.conf` as (for 11.0-RELEASE):
     ```
     [release]
     branch=base/releng/11.0
@@ -70,6 +71,7 @@
   ```
 
 #### packages update
+_NOTE: This section describes package updates by compilation them from sources (ports tree) by `portmaster`._
 
 * Update ports tree:
   ```
