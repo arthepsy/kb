@@ -2,7 +2,7 @@
 - [hardening](#hardening) - hardening the system  
   - [sysctl](#sysctl), [tmp](#tmp), [ntpd](#ntpd), [ssl](#ssl), [syslogd](#syslogd), [sendmail](#sendmail), [sshd](#sshd)  
 - [maintenance](#maintenance) - system and package maintenance  
-  - [system update](#system-update), [packages update](#packages-update)  
+  - [system update](#system-update), [system upgrade](#system-upgrade), [packages update](#packages-update)  
 
 ## hardening
 _NOTE: This section describes system hardening for FreeBSD 11.x._  
@@ -162,13 +162,13 @@ _NOTE: This section describes binary system updates via `freebsd-update` and cus
   
   * Verify configuration:  
   
-    This section relies that custom kernel is configured in `/etc/make.conf` as...  
+    This section relies that custom kernel is configured in `/etc/make.conf` as ...  
     ```
     KERNCONF=MY-KERNEL
     INSTKERNNAME=my-kernel
     ```
     
-    ... and respective `/boot/loader.conf.local` as...
+    ... and respective `/boot/loader.conf.local` as ...
     
     ```
     kernel="my-kernel"
@@ -202,6 +202,81 @@ _NOTE: This section describes binary system updates via `freebsd-update` and cus
 * Reboot
   ```
   sudo reboot
+  ```
+
+#### system upgrade
+
+_NOTE: This section describes upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel_.
+
+* Verify configuration:  
+
+  This section relies that custom kernel is configured in `/etc/make.conf` as ...  
+  ```
+  KERNCONF=MY-KERNEL
+  INSTKERNNAME=my-kernel
+  ```
+
+  ... and respective `/boot/loader.conf.local` as...
+
+  ```
+  kernel="my-kernel"
+  kernels="my-kernel kernel"
+  ```
+
+* Install `net/svnup` package and configure it for new release in `/usr/local/etc/svnup.conf`:  
+
+  ```
+  [release]
+  branch=base/releng/10.3
+  target=/usr/src
+  ```
+
+* Check kernel changes:  
+  
+  Keep a copy of old GENERIC kernel before source update:  
+  ```
+  sudo cp /usr/src/sys/`uname -m`/conf/GENERIC /root/GENERIC.prev
+  ```
+  
+  After source update, check differences:  
+  ```
+  sudo diff -ruN /root/GENERIC.prev /usr/src/sys/`uname -m`/conf/GENERIC
+  ```
+
+* Update sources and remove empty directories:  
+  ```
+  sudo svnup release
+  sudo find /usr/src -type d -empty -delete
+  ```
+
+* Compile and install custom kernel, then reboot:  
+  ```
+  cd /usr/src
+  sudo rm -rf /usr/obj/*
+  sudo make -j `sysctl -n hw.ncpu` kernel-toolchain
+  sudo make -j `sysctl -n hw.ncpu` buildkernel
+  sudo make installkernel
+  sudo reboot
+  ```
+
+* Download the upgrade, install kernel and reboot:  
+  ```
+  sudo env UNAME_r=10.2-RELEASE freebsd-update upgrade -r 10.3-RELEASE
+  sudo freebsd-update install
+  sudo reboot
+  ```
+
+  _NOTE: `UNAME_r` environment variable is provided to fake `uname -r` output for `freebsd-update`._ 
+
+* Install system upgrade and reboot:
+  ```
+  sudo freebsd-update install
+  sudo reboot
+  ```
+
+* (_optional_) Check system integrity:  
+  ```
+  sudo freebsd-update IDS
   ```
 
 #### packages update
