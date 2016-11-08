@@ -280,7 +280,7 @@ _NOTE: This section describes upgrade from FreeBSD 10.2 to FreeBSD 10.3 with cus
   ```
 
 #### packages update
-_NOTE: This section describes package updates by compilation them from sources (ports tree) by `portmaster`._
+_NOTE: This section describes package updates by compilation them from sources (ports tree) with `portmaster`._
 
 * Update ports tree:
   ```
