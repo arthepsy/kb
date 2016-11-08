@@ -204,6 +204,11 @@ _NOTE: This section describes binary system updates via `freebsd-update` and cus
   sudo reboot
   ```
 
+* (_optional_) Check system integrity:  
+  ```
+  sudo freebsd-update IDS
+  ```
+
 #### system upgrade
 
 _NOTE: This section describes upgrade from FreeBSD 10.2 to FreeBSD 10.3 with custom kernel_.
