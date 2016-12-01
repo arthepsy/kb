@@ -8,7 +8,7 @@ Available in base system since OpenBSD 5.6.
 
 * Download `root.hints`:  
   ```
-  doas curl -o /var/unbound/db/root.hints https://www.internic.net/domain/named.cache
+  doas fetch -o /var/unbound/db/root.hints https://www.internic.net/domain/named.cache
   ```
 
 * Download `root.key`:  
