@@ -93,6 +93,16 @@ _NOTE: This section describes system hardening for FreeBSD 11.x._
   sudo sysrc clear_tmp_enable="YES"
   ```
 
+#### ssl
+Use `LibreSSL` instead of `OpenSSL`.
+
+* Edit `/etc/make.conf` and configure ports to use `LibreSSL`:
+  ```
+  DEFAULT_VERSIONS+=  ssl=libressl
+  ```
+  
+  _Note: Ports depending on OpenSSL will have to be recompiled._
+
 #### ntpd
 Replace system `ntpd` with `OpenNTPD`.  
 
@@ -120,16 +130,6 @@ Replace system `ntpd` with `OpenNTPD`.
   sudo sysrc openntpd_enable=YES
   sudo service openntpd start
   ```
-
-#### ssl
-Use `LibreSSL` instead of `OpenSSL`.
-
-* Edit `/etc/make.conf` and configure ports to use `LibreSSL`:
-  ```
-  DEFAULT_VERSIONS+=  ssl=libressl
-  ```
-  
-  _Note: Ports depending on OpenSSL will have to be recompiled._
 
 #### syslogd
 * Change settings (_choose either variant_):
