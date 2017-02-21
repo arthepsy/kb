@@ -14,10 +14,17 @@
 
 * List available:
   ```
-  systemctl list-units-files
+  systemctl list-unit-files
   ```
 
 * Change state:
   ```
   systemctl status|enable|disable|start|stop|restart|stop unit
+  ```
+
+* Remove service:
+  ```
+  systemctl stop servicename
+  systemctl disable servicename
+  rm /usr/lib/systemd/system/servicename.service
   ```
