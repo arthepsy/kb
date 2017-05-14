@@ -153,7 +153,7 @@ Replace system `ntpd` with `OpenNTPD`.
 
   ```
   sudo service sendmail stop
-  sudo sysrc sendmail_enable="NO"
+  sudo sysrc sendmail_enable="NONE"
   ```
 
 #### sshd
