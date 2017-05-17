@@ -36,6 +36,11 @@
 
 
 ### rpm
+* List (installed) packages:  
+  ```
+  rpm -qa
+  ```
+
 * Verify package (_owner, group, mode, size, checksum, etc._):  
   ```
   rpm -V package
