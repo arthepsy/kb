@@ -1,4 +1,6 @@
 # DNS
+- [unbound](#unbound) - using `unbound` DNS resolver in [OpenBSD](#openbsd), [FreeBSD](#freebsd), [Windows](#windows) and in [general](#general)
+- [DHCP and resolv.conf](#dhcp-and-resolvconf) - using in [OpenBSD](#openbsd-1)
 
 ## unbound
 [Unbound](https://www.unbound.net/) is a validating, recursive, and caching DNS resolver.
@@ -74,11 +76,57 @@ Available in base system since FreeBSD 10.0.
   sudo service local_unbound reload
   ```
 
+#### Windows
+
+* Download and install unbound  
+
+* Download `root.hints`:  
+  ```
+  powershell -Command "(New-Object Net.WebClient).DownloadFile('https://www.internic.net/domain/named.cache', 'root.hints')"
+  ```
+
+* Download `root.key`:  
+  ```
+  unbound-anchor.exe -a root.key
+  ```
+  
+* Add root hints and trust anchor in `service.conf`:  
+  ```
+  server:
+        ...
+        auto-trust-anchor-file: "...\root.key"
+        root-hints: "...\root.hints"
+  
+  ```
+  
+* Configure logging to file in `service.conf`:  
+  ```
+  server:
+        ...
+        verbosity: 2
+        logfile: "...\unbound.log"
+        use-syslog: no
+  ```
+  
+* Start service:   
+  ```
+  sc start unbound
+  ```
+
+* Configure network settings to use `127.0.0.1` as DNS server.
+
+
 #### general
 
 * Harden `unbound` settings:  
   ```
   server:
+        interface: 127.0.0.1
+        interface: ::1
+        access-control: 0.0.0.0/0 refuse
+        access-control: 127.0.0.0/8 allow
+        access-control: ::0/0 refuse
+        access-control: ::1 allow        
         ...
         hide-identity: yes
         hide-version: yes         
