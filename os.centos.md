@@ -1,7 +1,7 @@
 # CentOS
 - [OpenNTPD](#openntpd) - replace `chrony` with `openntpd`  
 - [OpenSMTPD](#opensmtpd) - replace `postfix` with `opensmtpd`  
-- [iptable](#iptable) - iptables management  
+- [iptables](#iptables) - iptables management  
 
 ### OpenNTPD
 This section describes how to replace `chrony` with `openntpd`.
