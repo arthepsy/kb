@@ -1,4 +1,7 @@
 # CentOS
+- [OpenNTPD](#openntpd) - replace `chrony` with `openntpd`  
+- [OpenSMTPD](#opensmtpd) - replace `postfix` with `opensmtpd`  
+- [iptable](#iptable) - iptables management  
 
 ### OpenNTPD
 This section describes how to replace `chrony` with `openntpd`.
@@ -56,8 +59,27 @@ This section describes how to replace `chrony` with `openntpd`.
 
 * Enable service and start it:
   ```
-  systemctl enable openntpd.service
-  systemctl start openntpd.service
+  systemctl enable openntpd
+  systemctl start openntpd
+  ```
+
+### OpenSMTPD
+* Remove `postfix`:
+  ```
+  sudo systemctl stop chronyd
+  sudo yum remove chrony
+  ```
+  
+* Install and configure `opensmtpd`:
+  ```
+  sudo yum install opensmtpd
+  sudoedit /etc/opensmtpd/smtpd.conf
+  ```
+
+* Enable service and start it:
+  ```
+  systemctl enable opensmtpd
+  systemctl start opensmtpd
   ```
 
 ### iptables
