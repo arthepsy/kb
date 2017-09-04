@@ -66,8 +66,8 @@ This section describes how to replace `chrony` with `openntpd`.
 ### OpenSMTPD
 * Remove `postfix`:
   ```
-  sudo systemctl stop chronyd
-  sudo yum remove chrony
+  sudo systemctl stop postfix
+  sudo yum remove postfix
   ```
   
 * Install and configure `opensmtpd`:
