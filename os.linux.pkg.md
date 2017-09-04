@@ -41,6 +41,11 @@
   rpm -qa
   ```
 
+* List package contents:  
+  ```
+  rpm -ql package
+  ```
+  
 * Verify package (_owner, group, mode, size, checksum, etc._):  
   ```
   rpm -V package
