@@ -1,7 +1,40 @@
 # CentOS
+- [kernel](#kernel) - use mainline kernel  
 - [OpenNTPD](#openntpd) - replace `chrony` with `openntpd`  
 - [OpenSMTPD](#opensmtpd) - replace `postfix` with `opensmtpd`  
 - [iptables](#iptables) - iptables management  
+
+### kernel
+(_More information via http://elrepo.org/tiki/kernel-ml_)
+
+* Install `elrepo` repository:
+  ```
+  sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+  sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+  ```
+
+* List available kernels:
+  ```
+  yum --disablerepo="*" --enablerepo="elrepo-kernel" list available
+  ```
+
+* Install mainline kernel:
+  ```
+  yum --enablerepo=elrepo-kernel install kernel-ml
+  ```
+
+* Configure grub to use newest kernel (`sudoedit /etc/default/grub`):
+  ```
+  GRUB_DEFAULT=0
+  ```
+  
+* Recreate grub configuration:
+  ```
+  grub2-mkconfig -o /boot/grub2/grub.cfg
+  ```
+
+* Reboot into new kernel.
+
 
 ### OpenNTPD
 This section describes how to replace `chrony` with `openntpd`.
