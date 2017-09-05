@@ -3,6 +3,7 @@
 - [OpenNTPD](#openntpd) - replace `chrony` with `openntpd`  
 - [OpenSMTPD](#opensmtpd) - replace `postfix` with `opensmtpd`  
 - [iptables](#iptables) - iptables management  
+- [firewalld](#firewalld) - firewalld management
 
 ### kernel
 (_More information via http://elrepo.org/tiki/kernel-ml_)
@@ -132,4 +133,16 @@ This section describes how to replace `chrony` with `openntpd`.
   ```
   iptables-restore -t /etc/sysconfig/iptables
   systemctl restart iptables
+  ```
+
+### firewalld
+
+* Add permament rule to allow http
+  ```
+  sudo firewall-cmd --zone=public --add-service=http --permanent
+  ```
+  
+* Reload configuration
+  ```
+  sudo firewall-cmd --reload
   ```
