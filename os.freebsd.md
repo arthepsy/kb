@@ -177,7 +177,7 @@ Replace system `OpenSSH` with ports `OpenSSH`.
   Protocol 2
   
   HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,ssh-rsa,ssh-rsa-cert-v01@openssh.com
-  KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group18-sha512,diffie-hellman-group16-sha512,diffie-hellman-group14-sha256
+  KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group18-sha512,diffie-hellman-group16-sha512,diffie-hellman-group14-sha256
   Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
   MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com
   
@@ -188,7 +188,7 @@ Replace system `OpenSSH` with ports `OpenSSH`.
   VersionAddendum none
   ```
 
-  _NOTE: This example configuration is adjusted for strict and secure setup of OpenSSH 7.3. Test before making permanent._
+  _NOTE: This example configuration is adjusted for strict and secure setup of OpenSSH 7.5. Test before making permanent._
 
 * Enable and start `OpenSSH`:  
   ```
