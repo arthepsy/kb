@@ -145,7 +145,7 @@ Replace system `ntpd` with `OpenNTPD`.
 
 * Restart `syslogd`:  
   ```
-  sudo service restart syslogd
+  sudo service syslogd restart
   ```
 
 #### sendmail
