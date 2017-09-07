@@ -11,3 +11,8 @@
   ```
   openssl x509 -in test.crt -text -noout
   ```
+
+* signing request
+  ```
+  openssl req -in test.csr -text -noout
+  ```
