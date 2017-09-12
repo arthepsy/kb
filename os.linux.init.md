@@ -28,3 +28,14 @@
   systemctl disable servicename
   rm /usr/lib/systemd/system/servicename.service
   ```
+
+* Display logs by service:
+  ```
+  journalctl -u servicename.service
+  ```
+  
+* Display logs by uid:
+  ```
+  journalctl _UID=`id -u user`
+  ```
+  
