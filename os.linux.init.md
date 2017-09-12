@@ -31,11 +31,11 @@
 
 * Display logs by service:
   ```
-  journalctl -u servicename.service
+  journalctl -ru servicename.service
   ```
   
 * Display logs by uid:
   ```
-  journalctl _UID=`id -u user`
+  journalctl -r _UID=`id -u user`
   ```
   
