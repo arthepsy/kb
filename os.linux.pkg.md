@@ -41,6 +41,12 @@
   rpm -qa
   ```
 
+* Display package information:
+  ```
+  rpm -qi package
+  rpm -qi -p ./package.rpm
+  ```
+
 * List package contents:  
   ```
   rpm -ql package
@@ -50,3 +56,15 @@
   ```
   rpm -V package
   ```
+
+### deb
+* Display package information:
+  ```
+  dpkg-deb -I ./package.deb
+  ```
+
+* List package contents:  
+  ```
+  dpkg-deb -c ./package.deb
+  ```
+
