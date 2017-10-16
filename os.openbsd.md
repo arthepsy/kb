@@ -102,3 +102,10 @@ _Detailed manual and configuration changes_: https://www.openbsd.org/faq/upgrade
   ```
   reboot
   ```
+
+## full disk encryption
+
+### change passphrase
+```
+bioctl -P sd1
+```
