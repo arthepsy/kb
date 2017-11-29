@@ -62,6 +62,11 @@
   }
   ```
 
+* set grub wait time longer in `/etc/default/grub`
+  ```
+  GRUB_TIMEOUT=10
+  ```
+  
 * regenerate grub config
   ```
   grub2-mkconfig -o /boot/grub2/grub.cfg
@@ -70,8 +75,17 @@
 * reboot, select `mfsbsd` item and boot into mfsbsd (_root password: mfsroot_)
 
 * configure network (`ifconfig`, `route`, `/etc/resolv.conf`)
+  ```
+  ifconfig em0 192.168.0.1 netmask 255.255.255.0
+  route add default 192.168.0.254
+  echo "nameserver 8.8.8.8" > /etc/resolv.conf
+  ```
 
 * download `MANIFEST` file from mirror into `/usr/freebsd-dist/MANIFEST`
+  ```
+  mkdir -p /usr/freebsd-dist
+  ftp -o /usr/freebsd-dist/MANIFEST http://ftp.freebsd.org/pub/FreeBSD/releases/amd64/11.1-RELEASE/MANIFEST
+  ```
 
 * run installation as usual
   ```
